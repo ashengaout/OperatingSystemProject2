@@ -17,9 +17,9 @@ public class Main{
         }
 
         //create fork semaphores
-        Semaphore[] forks = new Semaphore[5];
+        Fork[] forks = new Fork[5];
         for(int i = 0; i < 5; i++) {
-            forks[i] = new Semaphore(1);
+            forks[i] = new Fork(i);
         }
 
         //Create philosopher threads
@@ -27,8 +27,8 @@ public class Main{
         for(int i = 0; i < 5; i++) {
             ProcessEntry p = processEntries.get(i);
 
-            Semaphore leftFork = forks[i];
-            Semaphore rightFork = forks[(i+1)%5];
+            Fork leftFork = forks[i];
+            Fork rightFork = forks[(i+1)%5];
 
             //deadlock avoidance: last philosopher picks up right fork first
             if(i ==4) {
